@@ -6,18 +6,22 @@ function Calculator() {
 
   const handleClick = (value) => {
     if (value === '=') {
-      try {
-        setResult(eval(input));
-      } catch (error) {
-        setResult('Error');
+        if (input === '' || '+-*/'.includes(input[input.length - 1])) {
+          setResult('Error');
+        } else {
+          try {
+            setResult(eval(input));
+          } catch (error) {
+            setResult('Error');
+          }
+        }
+      } else if (value === 'C') {
+        setInput('');
+        setResult('');
+      } else {
+        setInput(prevInput => prevInput + value);
       }
-    } else if (value === 'C') {
-      setInput('');
-      setResult('');
-    } else {
-      setInput(prevInput => prevInput + value);
-    }
-  };
+    };
 
   return (
     <div>
